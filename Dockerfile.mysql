@@ -1,0 +1,11 @@
+# Use the official MySQL image from Docker Hub
+FROM mysql:latest
+
+# Expose port 3306 for MySQL connections
+EXPOSE 3306
+
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Set the data directory as a volume
+VOLUME /var/lib/mysql
+

@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS bot_db;
+CREATE USER 'app_user'@'%' IDENTIFIED BY '1234';
+GRANT ALL ON bot_db.* TO 'app_user'@'%';
+FLUSH PRIVILEGES;

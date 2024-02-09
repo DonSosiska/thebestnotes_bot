@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  botapp:
+    image: botapp:latest
+    container_name: botapp
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+      args:
+        - PYTHON_VERSION=3.8
+    ports:
+      - "443:443"
+    environment:
+      - APP_ENV=Development
+      - PYTHONUNBUFFERED=1
+    networks:
+      - bot-network
+    depends_on:
+      - mysql
+    restart: always
+    entrypoint: ["python", "./main.py"]
+    
+  mysql:
+    image: mysql:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    container_name: mysql
+    ports: 
+      - 3306:3306
+    networks:
+      - bot-network
+    volumes:
+      - bot-volume:/var/lib/mysql
+    environment:
+      - APP_ENV=Development
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=bot_db
+      - MYSQL_USER=app_user
+      - MYSQL_PASSWORD=1234
+    
+networks:
+  bot-network:
+    driver: bridge
+
+volumes:
+  bot-volume:
