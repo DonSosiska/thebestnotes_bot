@@ -1,4 +1,4 @@
-import telebot
+Eimport telebot
 import mysql.connector
 import time
 
@@ -13,7 +13,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-bot = telebot.TeleBot("6370601068:AAFPKPxW5VdQrjHUmsM8lxy8AxKeiQh_tlI")
+bot = telebot.TeleBot("ENTER HERE UR TELEGRAM BOT TOKEN")
 
 mycursor.execute("CREATE TABLE IF NOT EXISTS users (id int auto_increment primary key, user_name varchar(50), user_id varchar(10))")
 mydb.commit()
